@@ -1,0 +1,12 @@
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\bin\Debug\net7.0\Bulky.Models.deps.json
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\bin\Debug\net7.0\Bulky.Models.dll
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\bin\Debug\net7.0\Bulky.Models.pdb
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\obj\Debug\net7.0\Bulky.Models.csproj.AssemblyReference.cache
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\obj\Debug\net7.0\Bulky.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\obj\Debug\net7.0\Bulky.Models.AssemblyInfoInputs.cache
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\obj\Debug\net7.0\Bulky.Models.AssemblyInfo.cs
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\obj\Debug\net7.0\Bulky.Models.csproj.CoreCompileInputs.cache
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\obj\Debug\net7.0\Bulky.Models.dll
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\obj\Debug\net7.0\refint\Bulky.Models.dll
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\obj\Debug\net7.0\Bulky.Models.pdb
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\Bulky.Models\obj\Debug\net7.0\ref\Bulky.Models.dll
