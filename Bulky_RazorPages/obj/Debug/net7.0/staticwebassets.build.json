@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "z/8iTAohNzUr75a0h4ODAtyX0eg2Q+b0qu2cpG/NFxA=",
+  "Hash": "NPtqtwuJR3ItmnB4HL5ljiQ54CefGePiwy6tFBqqsBA=",
   "Source": "Bulky_RazorPages",
   "BasePath": "_content/Bulky_RazorPages",
   "Mode": "Default",
@@ -1139,6 +1139,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\images\\book.png",
+      "SourceId": "BulkyWeb",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\",
+      "BasePath": "_content/BulkyWeb",
+      "RelativePath": "images/book.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\book.png"
+    },
+    {
+      "Identity": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\images\\lawn_leaf.jpg",
+      "SourceId": "BulkyWeb",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\",
+      "BasePath": "_content/BulkyWeb",
+      "RelativePath": "images/lawn_leaf.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\lawn_leaf.jpg"
     },
     {
       "Identity": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\images\\product\\27ca604a-7873-46fa-be4e-23179b079d1e.jpg",

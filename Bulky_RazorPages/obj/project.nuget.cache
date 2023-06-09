@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "b+p2CEogRT5SE+gNK7hO1Au3f+A6CPwDTSrQiizxTrN1uCu/xOoq5ayGMsPamxTRLIfRCXjkbzWMB6zTFi9OGA==",
+  "dgSpecHash": "dbxf/MEDIlCy0jxlI8/T7tLRS641NuxHBDn1/9iflZM//crX0cN3xsHczNZSqTvSgKiQRfBNObA/enLg+Z3BAw==",
   "success": true,
   "projectFilePath": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\Bulky_RazorPages\\Bulky_RazorPages.csproj",
   "expectedPackageFiles": [
@@ -139,6 +139,7 @@
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
+    "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\stripe.net\\41.19.0\\stripe.net.41.19.0.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\system.appcontext\\4.3.0\\system.appcontext.4.3.0.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",

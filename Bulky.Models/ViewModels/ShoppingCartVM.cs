@@ -10,7 +10,8 @@ namespace Bulky.Models.ViewModels
     {
         public IEnumerable<ShoppingCart> shoppingCartList { get; set; }
 
-        public double OrderTotal { get; set; }
+        public OrderHeader orderHeader { get; set; }
+        //public double OrderTotal { get; set; } ordertotal is present in OrderHeader
 
     }
 }

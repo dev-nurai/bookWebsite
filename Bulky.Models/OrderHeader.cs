@@ -30,6 +30,8 @@ namespace Bulky.Models
 
         public DateTime PaymentDate { get; set; }
         public DateTime PaymentDueDate { get; set; }
+
+        public string? SessionId { get; set; } // This is use for PaymenyIntentId or order record
         public string? PaymentIntentId { get; set; }
 
         [Required]
