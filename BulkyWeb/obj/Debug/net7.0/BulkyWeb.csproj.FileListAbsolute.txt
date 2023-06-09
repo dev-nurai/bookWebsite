@@ -76,6 +76,7 @@ C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\bin\Debug\net7.
 C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\bin\Debug\net7.0\NuGet.ProjectModel.dll
 C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\bin\Debug\net7.0\NuGet.Protocol.dll
 C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\bin\Debug\net7.0\NuGet.Versioning.dll
+C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\bin\Debug\net7.0\Stripe.net.dll
 C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\bin\Debug\net7.0\System.CodeDom.dll
 C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\bin\Debug\net7.0\System.Composition.AttributedModel.dll
 C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\bin\Debug\net7.0\System.Composition.Convention.dll
@@ -290,4 +291,3 @@ C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\obj\Debug\net7.
 C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\obj\Debug\net7.0\BulkyWeb.pdb
 C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\obj\Debug\net7.0\BulkyWeb.genruntimeconfig.cache
 C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\obj\Debug\net7.0\ref\BulkyWeb.dll
-C:\Users\BINATE-PC-08\Desktop\Nurai-Core\Projects\Bulky\BulkyWeb\bin\Debug\net7.0\Stripe.net.dll
