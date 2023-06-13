@@ -97,6 +97,10 @@
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\js\\user.js",
+      "PackagePath": "staticwebassets\\js\\user.js"
+    },
+    {
       "Id": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

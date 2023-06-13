@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Bulky.DataAccess.DbInitializer
 {
-    internal class DbInitializer : IDbInitializer
+    public class DbInitializer : IDbInitializer
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
