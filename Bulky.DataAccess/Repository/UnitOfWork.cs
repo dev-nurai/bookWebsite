@@ -24,6 +24,8 @@ namespace Bulky.DataAccess.Repository
 
         public IOrderDetailRepository OrderDetail { get; private set; }
 
+        public IProductImageRepository ProductImage { get; private set; }
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -34,6 +36,7 @@ namespace Bulky.DataAccess.Repository
             ApplicationUser = new ApplicationUserRepository(_context);
             OrderHeader = new OrderHeaderRepository(_context);
             OrderDetail = new OrderDetailRepository(_context);
+            ProductImage = new ProductImageRepository(_context);
         }
 
 

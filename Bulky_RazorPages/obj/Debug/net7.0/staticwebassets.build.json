@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mAMLmKMnpnbFw2jFbyNAjCYkpCFaNqOSt9ufIYXOw1w=",
+  "Hash": "tAz8IUPABb9STGNCxdcTfd5UGcuweZ+0x256G00ae+g=",
   "Source": "Bulky_RazorPages",
   "BasePath": "_content/Bulky_RazorPages",
   "Mode": "Default",
@@ -1496,6 +1496,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\js\\user.js",
+      "SourceId": "BulkyWeb",
+      "SourceType": "Project",
+      "ContentRoot": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\",
+      "BasePath": "_content/BulkyWeb",
+      "RelativePath": "js/user.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\user.js"
     },
     {
       "Identity": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\BulkyWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
