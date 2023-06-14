@@ -4,6 +4,7 @@ using Bulky.Models;
 using Bulky.Models.ViewModels;
 using Bulky.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
 using System.Security.Claims;
@@ -93,7 +94,6 @@ namespace BulkyWeb.Areas.Customer.Controllers
 		public IActionResult SummaryPOST()
 		{
 			var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
-
 			var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             ShoppingCartVM.shoppingCartList = _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == userId, includeProperties: "Product");
@@ -254,12 +254,34 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Remove(int cartId)
         {
+
             var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == cartId, tracked: true);
 
             HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
             _unitOfWork.ShoppingCart.Remove(cartFromDb);
            
             _unitOfWork.Save();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CartCountUpdate(ShoppingCart shoppingCart)
+        {
+
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == shoppingCart.Id, tracked: true);
+
+
+            var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == cartFromDb.ApplicationUserId).Count());
+
+
+            shoppingCart.ApplicationUserId = userId;
+
+            cartFromDb.Count += shoppingCart.Count;
+
+            _unitOfWork.ShoppingCart.Update(cartFromDb);
+            _unitOfWork.Save();
+
             return RedirectToAction(nameof(Index));
         }
 
