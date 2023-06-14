@@ -32,7 +32,6 @@ namespace BulkyWeb.Areas.Customer.Controllers
             //Shopping cart doesnot have OrderTotal so we need to create ShoppingCartVM
 
             var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
-
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             ShoppingCartVM = new()

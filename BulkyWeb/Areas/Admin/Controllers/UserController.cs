@@ -65,10 +65,12 @@ namespace BulkyWeb.Areas.Admin.Controllers
             string RoleId = _applicationDbContext.UserRoles.FirstOrDefault(x => x.UserId == roleManagementVM.ApplicationUser.Id).RoleId;
             string oldRole = _applicationDbContext.Roles.FirstOrDefault(x => x.Id == RoleId).Name;
 
-            if(!(roleManagementVM.ApplicationUser.Role == oldRole))
+            ApplicationUser applicationUser = _applicationDbContext.ApplicationUsers.FirstOrDefault(x => x.Id == roleManagementVM.ApplicationUser.Id);
+
+            if (!(roleManagementVM.ApplicationUser.Role == oldRole))
             {
                 //a role was updated
-                ApplicationUser applicationUser = _applicationDbContext.ApplicationUsers.FirstOrDefault(x=>x.Id == roleManagementVM.ApplicationUser.Id);
+                
 
                 if(roleManagementVM.ApplicationUser.Role == SD.Role_Company)
                 {
@@ -86,6 +88,14 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 //Assign new role
                 _userManager.AddToRoleAsync(applicationUser, roleManagementVM.ApplicationUser.Role).GetAwaiter().GetResult();
 
+            }
+            else
+            {
+                if (oldRole == SD.Role_Company && applicationUser.Id != roleManagementVM.ApplicationUser.CompanyId.ToString())
+                {
+                    applicationUser.CompanyId = roleManagementVM.ApplicationUser.CompanyId;
+                    _applicationDbContext.SaveChanges();
+                }
             }
            
 
