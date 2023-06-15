@@ -265,7 +265,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
         }
 
 
-
+        [HttpPost]
         public IActionResult CartCountUpdate(int cartId, int count)
         {
 
@@ -273,30 +273,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
             var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == cartId, tracked: true);
 
-            //Retrive the Live count from the Shopping Page [Button clicked]
+            cartFromDb.Count = count;
 
-
-
-            //Update the Cart value in database
-
-
-
-
-
-            if (cartFromDb.Count <= 0)
-            {
-                //remove cart product if the count become zero
-                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == cartFromDb.ApplicationUserId).Count());
-                _unitOfWork.ShoppingCart.Remove(cartFromDb);
-            }
-            else
-            {
-
-                _unitOfWork.ShoppingCart.Update(cartFromDb);
-
-            }
-
-            //_unitOfWork.ShoppingCart.Update(cartFromDb);
 
 
             _unitOfWork.Save();
