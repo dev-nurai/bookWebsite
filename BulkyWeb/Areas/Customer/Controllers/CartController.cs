@@ -39,14 +39,14 @@ namespace BulkyWeb.Areas.Customer.Controllers
             {
                 shoppingCartList = _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == userId, includeProperties: "Product"),
                 orderHeader = new()
-            
+
             };
 
-            IEnumerable<ProductImage> productImages = _unitOfWork.ProductImage.GetAll(); 
+            IEnumerable<ProductImage> productImages = _unitOfWork.ProductImage.GetAll();
 
             foreach (var cart in ShoppingCartVM.shoppingCartList)
             {
-                cart.Product.ProductImages = productImages.Where(x=>x.ProductId == cart.Product.Id).ToList();
+                cart.Product.ProductImages = productImages.Where(x => x.ProductId == cart.Product.Id).ToList();
                 cart.Price = GetPriceBasedOnQuantity(cart);
                 ShoppingCartVM.orderHeader.OrderTotal += (cart.Price * cart.Count);
             }
@@ -75,8 +75,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
             ShoppingCartVM.orderHeader.City = ShoppingCartVM.orderHeader.ApplicationUser.City;
             ShoppingCartVM.orderHeader.State = ShoppingCartVM.orderHeader.ApplicationUser.State;
             ShoppingCartVM.orderHeader.PostalCode = ShoppingCartVM.orderHeader.ApplicationUser.PostalCode;
-            
-            
+
+
 
             foreach (var cart in ShoppingCartVM.shoppingCartList)
             {
@@ -91,13 +91,13 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         [HttpPost]
         [ActionName("Summary")]
-		public IActionResult SummaryPOST()
-		{
-			var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
-			var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+        public IActionResult SummaryPOST()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             ShoppingCartVM.shoppingCartList = _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == userId, includeProperties: "Product");
-				
+
 
             ShoppingCartVM.orderHeader.OrderDate = DateTime.Now;
             ShoppingCartVM.orderHeader.ApplicationUserId = userId;
@@ -105,13 +105,13 @@ namespace BulkyWeb.Areas.Customer.Controllers
             ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(x => x.Id == userId);
 
 
-			foreach (var cart in ShoppingCartVM.shoppingCartList)
-			{
-				cart.Price = GetPriceBasedOnQuantity(cart);
-				ShoppingCartVM.orderHeader.OrderTotal += (cart.Price * cart.Count);
-			}
+            foreach (var cart in ShoppingCartVM.shoppingCartList)
+            {
+                cart.Price = GetPriceBasedOnQuantity(cart);
+                ShoppingCartVM.orderHeader.OrderTotal += (cart.Price * cart.Count);
+            }
 
-            if(applicationUser.CompanyId.GetValueOrDefault() == 0)
+            if (applicationUser.CompanyId.GetValueOrDefault() == 0)
             {
                 //it is a regular customer
                 ShoppingCartVM.orderHeader.OrderStatus = SD.StatusPending;
@@ -119,11 +119,11 @@ namespace BulkyWeb.Areas.Customer.Controllers
             }
             else
             {
-				//It is a company User;
-				ShoppingCartVM.orderHeader.OrderStatus = SD.StatusApproved;
-				ShoppingCartVM.orderHeader.PaymentStatus = SD.PaymentStatusDelayedPayment;
+                //It is a company User;
+                ShoppingCartVM.orderHeader.OrderStatus = SD.StatusApproved;
+                ShoppingCartVM.orderHeader.PaymentStatus = SD.PaymentStatusDelayedPayment;
 
-			}
+            }
 
             //order header
 
@@ -143,8 +143,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 _unitOfWork.Save();
             }
 
-			if (applicationUser.CompanyId.GetValueOrDefault() == 0)
-			{
+            if (applicationUser.CompanyId.GetValueOrDefault() == 0)
+            {
                 //it is a regular customer accound and we need to capture payment;
                 //Stripe logic
 
@@ -191,26 +191,26 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
 
             return RedirectToAction(nameof(OrderConfirmation), new { id = ShoppingCartVM.orderHeader.Id });
-		}
+        }
 
         public IActionResult OrderConfirmation(int id)
         {
-            OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(x=> x.Id == id, includeProperties: "ApplicationUser");
+            OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(x => x.Id == id, includeProperties: "ApplicationUser");
 
-            if(orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment)
+            if (orderHeader.PaymentStatus != SD.PaymentStatusDelayedPayment)
             {
                 //This is an order by customer
 
                 var service = new SessionService();
                 Session session = service.Get(orderHeader.SessionId);
 
-                if(session.PaymentStatus.ToLower() == "paid")
+                if (session.PaymentStatus.ToLower() == "paid")
                 {
                     _unitOfWork.OrderHeader.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
                     _unitOfWork.OrderHeader.UpdateStatus(id, SD.StatusApproved, SD.PaymentStatusApproved);
                     _unitOfWork.Save();
                 }
-
+                
                 HttpContext.Session.Clear();
 
             }
@@ -223,34 +223,34 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
             return View(id);
         }
-        
-		public IActionResult Plus(int cartId)
-        {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == cartId);
-            cartFromDb.Count += 1;
-            _unitOfWork.ShoppingCart.Update(cartFromDb);
-            _unitOfWork.Save();
-            return RedirectToAction(nameof(Index));
-        }
 
-        public IActionResult Minus(int cartId)
-        {
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == cartId, tracked: true);
-            if (cartFromDb.Count <= 1)
-            {
-                //remove cart product if the count become zero
-                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
-                _unitOfWork.ShoppingCart.Remove(cartFromDb);
-            }
-            else
-            {
-                cartFromDb.Count -= 1;
-                _unitOfWork.ShoppingCart.Update(cartFromDb);
-            }
+        //public IActionResult Plus(int cartId)
+        //      {
+        //          var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == cartId);
+        //          cartFromDb.Count += 1;
+        //          _unitOfWork.ShoppingCart.Update(cartFromDb);
+        //          _unitOfWork.Save();
+        //          return RedirectToAction(nameof(Index));
+        //      }
 
-            _unitOfWork.Save();
-            return RedirectToAction(nameof(Index));
-        }
+        //      public IActionResult Minus(int cartId)
+        //      {
+        //          var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == cartId, tracked: true);
+        //          if (cartFromDb.Count <= 1)
+        //          {
+        //              //remove cart product if the count become zero
+        //              HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
+        //              _unitOfWork.ShoppingCart.Remove(cartFromDb);
+        //          }
+        //          else
+        //          {
+        //              cartFromDb.Count -= 1;
+        //              _unitOfWork.ShoppingCart.Update(cartFromDb);
+        //          }
+
+        //          _unitOfWork.Save();
+        //          return RedirectToAction(nameof(Index));
+        //}
 
         public IActionResult Remove(int cartId)
         {
@@ -259,27 +259,46 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
             HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == cartFromDb.ApplicationUserId).Count() - 1);
             _unitOfWork.ShoppingCart.Remove(cartFromDb);
-           
+
             _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult CartCountUpdate(ShoppingCart shoppingCart)
+
+
+        public IActionResult CartCountUpdate(int cartId, int count)
         {
 
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == shoppingCart.Id, tracked: true);
+            //Find the count value from the database
+
+            var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == cartId, tracked: true);
+
+            //Retrive the Live count from the Shopping Page [Button clicked]
 
 
-            var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == cartFromDb.ApplicationUserId).Count());
+
+            //Update the Cart value in database
 
 
-            shoppingCart.ApplicationUserId = userId;
 
-            cartFromDb.Count += shoppingCart.Count;
 
-            _unitOfWork.ShoppingCart.Update(cartFromDb);
+
+            if (cartFromDb.Count <= 0)
+            {
+                //remove cart product if the count become zero
+                HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == cartFromDb.ApplicationUserId).Count());
+                _unitOfWork.ShoppingCart.Remove(cartFromDb);
+            }
+            else
+            {
+
+                _unitOfWork.ShoppingCart.Update(cartFromDb);
+
+            }
+
+            //_unitOfWork.ShoppingCart.Update(cartFromDb);
+
+
             _unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
@@ -304,5 +323,8 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 }
             }
         }
+
+        
+
     }
 }
