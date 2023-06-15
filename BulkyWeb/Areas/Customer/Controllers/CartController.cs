@@ -54,6 +54,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
             return View(ShoppingCartVM);
         }
 
+        
         public IActionResult Summary()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
@@ -275,8 +276,6 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
             cartFromDb.Count = count;
 
-
-
             _unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
@@ -285,6 +284,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         private double GetPriceBasedOnQuantity(ShoppingCart shoppingCart)
         {
+            
             if (shoppingCart.Count <= 50)
             {
                 return shoppingCart.Product.Price;
