@@ -47,7 +47,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
         [Authorize]
         public IActionResult Details(ShoppingCart shoppingCart)
         {
-            if (!ModelState.IsValid)
+            if (shoppingCart.Count >= 1)
             {
 
 
@@ -83,7 +83,19 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            return View(shoppingCart);
+
+            TempData["error"] = "Invalid Quantity";
+
+            ShoppingCart returnShoppingCart = new()
+            {
+                Product = _unitOfWork.Product.Get(x => x.Id == shoppingCart.ProductId, includeProperties: "Category,ProductImages"),
+                Count = 1,
+                ProductId = shoppingCart.ProductId
+
+            };
+
+            return View(returnShoppingCart);
+
         }
 
         public IActionResult Privacy()

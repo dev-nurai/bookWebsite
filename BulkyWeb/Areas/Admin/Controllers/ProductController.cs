@@ -31,6 +31,27 @@ namespace BulkyWeb.Areas.Admin.Controllers
             return View(listOfProducts);
         }
 
+        public IActionResult Detail(int? id)
+        {
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });
+
+            ProductVM productVM = new()
+            {
+                CategoryList = CategoryList,
+                Product = new Product()
+            };
+
+            //Product Images
+            productVM.Product = _unitOfWork.Product.Get(u => u.Id == id, includeProperties: "Category,ProductImages");
+            return View(productVM);
+
+        }
+
         public IActionResult Upsert(int? id)
         {
             IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
