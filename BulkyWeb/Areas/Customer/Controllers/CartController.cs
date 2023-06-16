@@ -32,6 +32,11 @@ namespace BulkyWeb.Areas.Customer.Controllers
             //Retrive shopping cart and pass it the view,
             //Shopping cart doesnot have OrderTotal so we need to create ShoppingCartVM
 
+            return GetCartDetails();
+        }
+
+        private IActionResult GetCartDetails()
+        {
             var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
@@ -51,42 +56,46 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 ShoppingCartVM.orderHeader.OrderTotal += (cart.Price * cart.Count);
             }
 
-            return View(ShoppingCartVM);
+            return View("Index", ShoppingCartVM);
         }
 
-        
         public IActionResult Summary()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
-
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-            ShoppingCartVM = new()
+            if (ModelState.IsValid)
             {
-                shoppingCartList = _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == userId, includeProperties: "Product"),
-                orderHeader = new()
+                var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
 
-            };
-            ShoppingCartVM.orderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get(x => x.Id == userId);
+                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            //Assign the value to the Summary details page
-            ShoppingCartVM.orderHeader.Name = ShoppingCartVM.orderHeader.ApplicationUser.Name;
-            ShoppingCartVM.orderHeader.PhoneNumber = ShoppingCartVM.orderHeader.ApplicationUser.PhoneNumber;
-            ShoppingCartVM.orderHeader.StreetAddress = ShoppingCartVM.orderHeader.ApplicationUser.StreetAddress;
-            ShoppingCartVM.orderHeader.City = ShoppingCartVM.orderHeader.ApplicationUser.City;
-            ShoppingCartVM.orderHeader.State = ShoppingCartVM.orderHeader.ApplicationUser.State;
-            ShoppingCartVM.orderHeader.PostalCode = ShoppingCartVM.orderHeader.ApplicationUser.PostalCode;
+                ShoppingCartVM = new()
+                {
+                    shoppingCartList = _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == userId, includeProperties: "Product"),
+                    orderHeader = new()
+
+                };
+                ShoppingCartVM.orderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get(x => x.Id == userId);
+
+                //Assign the value to the Summary details page
+                ShoppingCartVM.orderHeader.Name = ShoppingCartVM.orderHeader.ApplicationUser.Name;
+                ShoppingCartVM.orderHeader.PhoneNumber = ShoppingCartVM.orderHeader.ApplicationUser.PhoneNumber;
+                ShoppingCartVM.orderHeader.StreetAddress = ShoppingCartVM.orderHeader.ApplicationUser.StreetAddress;
+                ShoppingCartVM.orderHeader.City = ShoppingCartVM.orderHeader.ApplicationUser.City;
+                ShoppingCartVM.orderHeader.State = ShoppingCartVM.orderHeader.ApplicationUser.State;
+                ShoppingCartVM.orderHeader.PostalCode = ShoppingCartVM.orderHeader.ApplicationUser.PostalCode;
 
 
 
-            foreach (var cart in ShoppingCartVM.shoppingCartList)
-            {
-                cart.Price = GetPriceBasedOnQuantity(cart);
-                ShoppingCartVM.orderHeader.OrderTotal += (cart.Price * cart.Count);
+                foreach (var cart in ShoppingCartVM.shoppingCartList)
+                {
+                    cart.Price = GetPriceBasedOnQuantity(cart);
+                    ShoppingCartVM.orderHeader.OrderTotal += (cart.Price * cart.Count);
+                }
+
+
+                return View(ShoppingCartVM);
             }
-
-
-            return View(ShoppingCartVM);
+            return View();
+            
         }
 
 
@@ -269,16 +278,20 @@ namespace BulkyWeb.Areas.Customer.Controllers
         [HttpPost]
         public IActionResult CartCountUpdate(int cartId, int count)
         {
+            if(count >= 1)
+            {
+                var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == cartId, tracked: true);
 
-            //Find the count value from the database
+                cartFromDb.Count = count;
 
-            var cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.Id == cartId, tracked: true);
+                _unitOfWork.Save();
 
-            cartFromDb.Count = count;
+                return RedirectToAction(nameof(Index));
+            }
 
-            _unitOfWork.Save();
+            TempData["error"] = "Invalid quantity";
 
-            return RedirectToAction(nameof(Index));
+            return GetCartDetails();
         }
 
 
