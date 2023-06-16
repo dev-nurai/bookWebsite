@@ -18,42 +18,72 @@
                     <div class="border p-3">
                         @*<div asp-validation-summary="None"></div>*@
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Title" readonly class="form-control border-0 shadow" />
+                            @*<input asp-for="Product.Title" readonly class="form-control border-0 shadow" />*@
                             <label asp-for="Product.Title" class="ms-2"></label>
+                            <br/>
+                            <p>
+                                @Model.Product.Title
+                            </p>
+
                         </div>
                         <div class="py-2 col-12">
                             <label asp-for="Product.Description" class="ms-2 text-muted"></label>
-                            <input type="text" asp-for="Product.Description" readonly class="form-control border-0 shadow"/>
+                            <p>@Html.Raw(Model.Product.Description)</p>
+                            @*<input type="text"  readonly class="form-control border-0 shadow"/>*@
 
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.ISBN" readonly class="form-control border-0 shadow" />
+                            @*<input asp-for="Product.ISBN" readonly class="form-control border-0 shadow" />*@
                             <label asp-for="Product.ISBN" class="ms-2"></label>
+                            <br/>
+                            <p>
+                                @Model.Product.ISBN
+                            </p>
                             
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Author" readonly class="form-control border-0 shadow" />
+                            @*<input asp-for="Product.Author" readonly class="form-control border-0 shadow" />*@
                             <label asp-for="Product.Author" class="ms-2"></label>
+                            <br/>
+                            <p>
+                                @Model.Product.Author
+                            </p>
                             
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.ListPrice" readonly class="form-control border-0 shadow" />
+                            @*<input asp-for="Product.ListPrice" readonly class="form-control border-0 shadow" />*@
                             <label asp-for="Product.ListPrice" class="ms-2"></label>
+                            <br/>
+                            <p>
+                                @Model.Product.ListPrice
+                            </p>
+                            
                             
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Price" readonly class="form-control border-0 shadow" />
+                            @*<input asp-for="Product.Price" readonly class="form-control border-0 shadow" />*@
                             <label asp-for="Product.Price" class="ms-2"></label>
+                            <br/>
+                            <p>
+                                @Model.Product.Price
+                            </p>
                             
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Price50" readonly class="form-control border-0 shadow" />
+                            @*<input asp-for="Product.Price50" readonly class="form-control border-0 shadow" />*@
                             <label asp-for="Product.Price50" class="ms-2"></label>
+                            <br/>
+                            <p>
+                                @Model.Product.Price50
+                            </p>
                             
                         </div>
                         <div class="form-floating py-2 col-12">
-                            <input asp-for="Product.Price100" readonly class="form-control border-0 shadow" />
+                            @*<input asp-for="Product.Price100" readonly class="form-control border-0 shadow" />*@
+                            
                             <label asp-for="Product.Price100" class="ms-2"></label>
+                            <br/>
+                            <p>@Model.Product.Price100</p>
                            
                         </div>
 
@@ -62,9 +92,12 @@
                             @*<select asp-for="@Model.Product.CategoryId" disabled asp-items="@Model.CategoryList" class="form-select border-0 shadow">
                             <option  selected>---Select Category---</option>
                             </select>*@
+                           @* <input type="text" asp-for="@Model.Product.Category.Name" disabled class="form-control border-0 shadow" />*@
+
                             
-                            <input type="text" asp-for="@Model.Product.Category.Name" disabled class="form-control border-0 shadow" />
                             <label asp-for="Product.Category.Name" class="ms-2"></label>
+                            <br/>
+                            <p>@Model.Product.Category.Name</p>
 
                         </div>
                             
