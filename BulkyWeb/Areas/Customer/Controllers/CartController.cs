@@ -12,7 +12,7 @@ using System.Security.Claims;
 namespace BulkyWeb.Areas.Customer.Controllers
 {
     [Area("Customer")]
-    [Authorize]
+    //[Authorize]
     public class CartController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

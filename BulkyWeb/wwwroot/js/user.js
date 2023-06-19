@@ -23,6 +23,7 @@ function loadDataTable() {
 
                     if (lockout > today) {
                         return `
+                        
                         <div class="text-center">
                             <a onclick=LockUnlock('${data.id}') class="btn btn-danger text-white" style="cursor:pointer; width:100px">
                                 <i class="bi bi-lock-fill"></i> Lock

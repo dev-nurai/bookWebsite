@@ -62,10 +62,14 @@ namespace BulkyWeb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult RoleManegement(RoleManagementVM roleManagementVM)
         {
+            //Current Role
             string RoleId = _applicationDbContext.UserRoles.FirstOrDefault(x => x.UserId == roleManagementVM.ApplicationUser.Id).RoleId;
+            //Old Role
             string oldRole = _applicationDbContext.Roles.FirstOrDefault(x => x.Id == RoleId).Name;
 
             ApplicationUser applicationUser = _applicationDbContext.ApplicationUsers.FirstOrDefault(x => x.Id == roleManagementVM.ApplicationUser.Id);
+
+
 
             if (!(roleManagementVM.ApplicationUser.Role == oldRole))
             {
@@ -78,6 +82,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
                 }
                 if(oldRole == SD.Role_Company)
                 {
+                    //Role changed from Company to others then make the col - null
                     applicationUser.CompanyId = null;
                 }
                 _applicationDbContext.SaveChanges();

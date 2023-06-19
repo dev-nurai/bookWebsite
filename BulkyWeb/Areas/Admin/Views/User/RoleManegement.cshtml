@@ -1,9 +1,12 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "RoleManegement";
 }
 
 @model RoleManagementVM
+@using Microsoft.AspNetCore.Identity
+
+
+@inject UserManager<IdentityUser> UserManager
 
 
 <div class="card shadow border-0 mt-4">
@@ -17,41 +20,76 @@
     <div class="card-body p-4">
         <form method="post" class="row">
             <input asp-for="ApplicationUser.Id" hidden />
-            
+
+
+
             <div class="border p-3">
                 @*<div asp-validation-summary="None"></div>*@
                 <div class="form-floating py-2 col-12">
-                    <input asp-for="ApplicationUser.Name" readonly class="form-control border-0 shadow"/>
+                    <input asp-for="ApplicationUser.Name" readonly class="form-control border-0 shadow" />
                     <label asp-for="ApplicationUser.Name" class="ms-2"></label>
 
                 </div>
-                  
-                
-                <div class="form-floating py-2 col-12">
-                    <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList" class="form-select">
-                    </select>
-                    
-                </div>
-                @{
-                    var companyVisible = "display:none;";
-                }
-                @if(Model.ApplicationUser.Role == SD.Role_Company)
+
+                @if (UserManager.GetUserName(User) == Model.ApplicationUser.UserName)
                 {
-                    companyVisible = "display:block;";
+                    
+                    <div class="form-floating py-2 col-12">
+                        <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList" class="form-select" disabled>
+                        </select>
+
+                    </div>
+
+                    var companyVisible = "display:none;";
+
+                    @if (Model.ApplicationUser.Role == SD.Role_Company)
+                    {
+                        companyVisible = "display:block;";
+                    }
+
+                    <div class="form-floating py-2 col-12">
+                        <select asp-for="ApplicationUser.CompanyId" style="@companyVisible" asp-items="@Model.CompanyList" class="form-select">
+                        </select>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-6 col-md-3">
+                            <button type="submit" class="btn btn-primary form-control" disabled>Update Role</button>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a asp-action="Index" class="btn btn-outline-primary border form-control">Back to list</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-floating py-2 col-12">
+                        <select asp-for="ApplicationUser.Role" asp-items="@Model.RoleList" class="form-select">
+                        </select>
+
+                    </div>
+
+                    var companyVisible = "display:none;";
+
+                    @if (Model.ApplicationUser.Role == SD.Role_Company)
+                    {
+                        companyVisible = "display:block;";
+                    }
+
+                    <div class="form-floating py-2 col-12">
+                        <select asp-for="ApplicationUser.CompanyId" style="@companyVisible" asp-items="@Model.CompanyList" class="form-select">
+                        </select>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-6 col-md-3">
+                            <button type="submit" class="btn btn-primary form-control">Update Role</button>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a asp-action="Index" class="btn btn-outline-primary border form-control">Back to list</a>
+                        </div>
+                    </div>
                 }
 
-                <div class="form-floating py-2 col-12">
-                    <select asp-for="ApplicationUser.CompanyId" style="@companyVisible" asp-items="@Model.CompanyList" class="form-select">
-                    </select>
-                </div>
-                <div class="row pt-2">
-                    <div class="col-6 col-md-3">
-                        <button type="submit" class="btn btn-primary form-control">Update Role</button>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <a asp-action="Index" class="btn btn-outline-primary border form-control">Back to list</a>
-                    </div>
-                </div>
+                
 
             </div>
 

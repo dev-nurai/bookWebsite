@@ -44,7 +44,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public IActionResult Details(ShoppingCart shoppingCart)
         {
             if (shoppingCart.Count >= 1)
