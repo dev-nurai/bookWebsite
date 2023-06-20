@@ -27,6 +27,9 @@ namespace Bulky.Utility
 
 
         public const string SessionCart = "SessionShoppingCart";
+        public const string GuestSessionId = "GuestSessionId";
+
+
 
 
 

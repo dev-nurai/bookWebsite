@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "g6s1W3O9VZXApjcptCdxDEpngofRKAhpactRwn5R2Te/yn8XQw6D0i4Yo+TJ66f8HFPLve5b1skmiEg5SKakYw==",
+  "dgSpecHash": "qbqpXFr+7AtBqmIv0B08YqpUvWyeC8Brf8iGW3P5qan5ga/AzX8DYb5j6E40+u2mxPLlyaP9XgjFrDjFV1cRiA==",
   "success": true,
   "projectFilePath": "C:\\Users\\BINATE-PC-08\\Desktop\\Nurai-Core\\Projects\\Bulky\\Bulky.DataAccess\\Bulky.DataAccess.csproj",
   "expectedPackageFiles": [
@@ -35,6 +35,7 @@
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\microsoft.aspnetcore.responsecaching.abstractions\\2.2.0\\microsoft.aspnetcore.responsecaching.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\microsoft.aspnetcore.routing\\2.2.0\\microsoft.aspnetcore.routing.2.2.0.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\microsoft.aspnetcore.routing.abstractions\\2.2.0\\microsoft.aspnetcore.routing.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\microsoft.aspnetcore.session\\2.2.0\\microsoft.aspnetcore.session.2.2.0.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\BINATE-PC-08\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

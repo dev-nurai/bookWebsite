@@ -33,7 +33,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(100);
+    options.IdleTimeout = TimeSpan.FromDays(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -70,6 +70,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
+
 SeedDatabase();
 
 app.MapRazorPages();

@@ -24,7 +24,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Index()
         {
-
+            //HttpContext.Session.SetInt32(SD.GuestSessionId, _unitOfWork.ShoppingCart.GetAll(x => x.SessionId ).Count());
             
             IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages");
             return View(productList);
@@ -32,6 +32,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
         public IActionResult Details(int productId)
         {
+            
             ShoppingCart shoppingCart = new()
             {
                 Product = _unitOfWork.Product.Get(x => x.Id == productId, includeProperties: "Category,ProductImages"),
@@ -49,19 +50,25 @@ namespace BulkyWeb.Areas.Customer.Controllers
         {
             if (shoppingCart.Count >= 1)
             {
+                //Session
 
+                string sessionId = HttpContext.Session.Id;
 
                 //we need user id to add cart
                 var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
 
-                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                if(claimsIdentity.Name != null)
+                {
+                    var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                   shoppingCart.ApplicationUserId = userId;
+                }
+                
 
-                shoppingCart.ApplicationUserId = userId;
-
+                shoppingCart.SessionId = sessionId;
 
                 //Check shoppingcart count from DB
 
-                ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.ApplicationUserId == userId && x.ProductId == shoppingCart.ProductId);
+                ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(x => x.SessionId == sessionId && x.ProductId == shoppingCart.ProductId);
 
                 if (cartFromDb != null)
                 {
@@ -75,7 +82,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
                     //Add new record
                     _unitOfWork.ShoppingCart.Add(shoppingCart);
                     _unitOfWork.Save();
-                    HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == userId).Count());
+                    HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.SessionId == sessionId).Count());
                 }
 
                 TempData["success"] = "Cart updated successfully";

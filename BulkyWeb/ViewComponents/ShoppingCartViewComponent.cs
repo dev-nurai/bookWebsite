@@ -15,25 +15,29 @@ namespace BulkyWeb.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            string sessionId = HttpContext.Session.Id;
 
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            //var claimsIdentity = (ClaimsIdentity)User.Identity;
 
-            if (claim != null)
-            {
-                //Sql will not hit;
-                if (HttpContext.Session.GetInt32(SD.SessionCart) == null)
-                {
-                    HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == claim.Value).Count());
-                }
+            //var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            return View(_unitOfWork.ShoppingCart.GetAll(x=>x.SessionId == sessionId).Count());
+
+            //if (sessionId != null)
+            //{
+            //    //Sql will not hit;
+            //    if (HttpContext.Session.GetInt32(SD.SessionCart) == null)
+            //    {
+            //        HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(x => x.SessionId == sessionId).Count());
+            //    }
                 
-                return View(HttpContext.Session.GetInt32(SD.SessionCart) );
-            }
-            else
-            {
-                HttpContext.Session.Clear();
-                return View(0);
-            }
+            //    return View(HttpContext.Session.GetInt32(SD.SessionCart) );
+            //}
+            //else
+            //{
+            //    HttpContext.Session.Clear();
+            //    return View(0);
+            //}
 
         }
 

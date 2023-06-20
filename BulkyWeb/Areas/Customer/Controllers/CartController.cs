@@ -26,23 +26,33 @@ namespace BulkyWeb.Areas.Customer.Controllers
         }
 
         [Area("Customer")]
-        [Authorize]
+        //[Authorize]
         public IActionResult Index()
         {
             //Retrive shopping cart and pass it the view,
             //Shopping cart doesnot have OrderTotal so we need to create ShoppingCartVM
+
 
             return GetCartDetails();
         }
 
         private IActionResult GetCartDetails()
         {
+
+            string sessionId = HttpContext.Session.Id;
+
             var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            if (claimsIdentity.Name != null)
+            {
+                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            }
+            
+
 
             ShoppingCartVM = new()
             {
-                shoppingCartList = _unitOfWork.ShoppingCart.GetAll(x => x.ApplicationUserId == userId, includeProperties: "Product"),
+                shoppingCartList = _unitOfWork.ShoppingCart.GetAll(x => x.SessionId == sessionId, includeProperties: "Product"),
                 orderHeader = new()
 
             };
@@ -50,7 +60,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
             IEnumerable<ProductImage> productImages = _unitOfWork.ProductImage.GetAll();
 
             foreach (var cart in ShoppingCartVM.shoppingCartList)
-            {
+            { 
                 cart.Product.ProductImages = productImages.Where(x => x.ProductId == cart.Product.Id).ToList();
                 cart.Price = GetPriceBasedOnQuantity(cart);
                 ShoppingCartVM.orderHeader.OrderTotal += (cart.Price * cart.Count);
@@ -294,7 +304,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
             return GetCartDetails();
         }
 
-
+        //Price discount as per quantity
         private double GetPriceBasedOnQuantity(ShoppingCart shoppingCart)
         {
             
