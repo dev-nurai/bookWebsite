@@ -69,6 +69,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
             return View("Index", ShoppingCartVM);
         }
 
+        [Authorize]
         public IActionResult Summary()
         {
             if (ModelState.IsValid)
@@ -76,6 +77,16 @@ namespace BulkyWeb.Areas.Customer.Controllers
                 var claimsIdentity = (ClaimsIdentity)User.Identity; //default method by .Net team
 
                 var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                
+
+                //Assign userId to the Application user using sessionId
+                string sessionId = HttpContext.Session.Id;
+
+                var shoppingCart = _unitOfWork.ShoppingCart.GetAll(x => x.SessionId == sessionId);
+                shoppingCart.ApplicationUserId = userId;
+                _unitOfWork.ShoppingCart.Update(shoppingCart);
+                _unitOfWork.Save();
+                
 
                 ShoppingCartVM = new()
                 {
